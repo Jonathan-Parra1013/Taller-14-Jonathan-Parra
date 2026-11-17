@@ -5,8 +5,7 @@ public class Main {
         estacion.agregar(new SensorNacional("Chapinero", 15.2));
 
         SensorImportado tx = new SensorImportado("TX-900", 60.8);
-        // estacion.agregar(tx);   // NO COMPILA: SensorImportado no es SensorTemperatura
-        estacion.agregarImportado(tx);
+        estacion.agregar(new AdaptadorSensorImportado(tx));
 
         estacion.reporte();
     }

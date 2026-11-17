@@ -1,4 +1,4 @@
-public class Archivo {
+public class Archivo implements ElementoSistema {
     private String nombre;
     private int tamanoKB;
 
@@ -7,11 +7,18 @@ public class Archivo {
         this.tamanoKB = tamanoKB;
     }
 
+    @Override
     public String getNombre() {
         return nombre;
     }
 
+    @Override
     public int getTamanoKB() {
         return tamanoKB;
+    }
+
+    @Override
+    public void mostrar(String sangria) {
+        System.out.println(sangria + nombre + " (" + tamanoKB + " KB)");
     }
 }

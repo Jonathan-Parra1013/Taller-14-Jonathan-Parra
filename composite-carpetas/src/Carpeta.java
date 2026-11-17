@@ -1,43 +1,41 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Carpeta {
+public class Carpeta implements ElementoSistema {
     private String nombre;
-    // PROBLEMA: una lista por cada tipo de cosa que puede ir adentro
-    private List<Archivo> archivos = new ArrayList<>();
-    private List<Carpeta> subcarpetas = new ArrayList<>();
+    private List<ElementoSistema> contenido = new ArrayList<>();
 
     public Carpeta(String nombre) {
         this.nombre = nombre;
     }
 
-    public void agregarArchivo(Archivo a) {
-        archivos.add(a);
+    public void agregar(ElementoSistema elemento) {
+        contenido.add(elemento);
     }
 
-    public void agregarCarpeta(Carpeta c) {
-        subcarpetas.add(c);
+    public void eliminar(ElementoSistema elemento) {
+        contenido.remove(elemento);
     }
 
-    // PROBLEMA: cada operacion repite dos ciclos, uno por lista
+    @Override
+    public String getNombre() {
+        return nombre;
+    }
+
+    @Override
     public int getTamanoKB() {
         int total = 0;
-        for (Archivo a : archivos) {
-            total += a.getTamanoKB();
-        }
-        for (Carpeta c : subcarpetas) {
-            total += c.getTamanoKB();
+        for (ElementoSistema e : contenido) {
+            total += e.getTamanoKB();
         }
         return total;
     }
 
+    @Override
     public void mostrar(String sangria) {
-        System.out.println(sangria + "[" + nombre + "] " + getTamanoKB() + " KB");
-        for (Archivo a : archivos) {
-            System.out.println(sangria + "   " + a.getNombre() + " " + a.getTamanoKB() + " KB");
-        }
-        for (Carpeta c : subcarpetas) {
-            c.mostrar(sangria + "   ");
+        System.out.println(sangria + "[" + nombre + "] (" + getTamanoKB() + " KB)");
+        for (ElementoSistema e : contenido) {
+            e.mostrar(sangria + "   ");
         }
     }
 }

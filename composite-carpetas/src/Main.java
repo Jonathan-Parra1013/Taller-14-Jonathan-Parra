@@ -1,24 +1,28 @@
 public class Main {
     public static void main(String[] args) {
         Carpeta documentos = new Carpeta("Documentos");
-        documentos.agregarArchivo(new Archivo("hoja-de-vida.pdf", 250));
+        Archivo hojaDeVida = new Archivo("hoja-de-vida.pdf", 250);
+        documentos.agregar(hojaDeVida);
 
         Carpeta fotos = new Carpeta("Fotos");
-        fotos.agregarArchivo(new Archivo("grado.jpg", 2400));
-        fotos.agregarArchivo(new Archivo("paseo.jpg", 1800));
-        documentos.agregarCarpeta(fotos);
+        fotos.agregar(new Archivo("grado.jpg", 2400));
+        fotos.agregar(new Archivo("paseo.jpg", 1800));
+        documentos.agregar(fotos);
 
         Carpeta universidad = new Carpeta("Universidad");
-        universidad.agregarArchivo(new Archivo("taller-poo.pdf", 320));
+        universidad.agregar(new Archivo("taller-poo.pdf", 320));
+        
         Carpeta proyecto = new Carpeta("Proyecto");
-        proyecto.agregarArchivo(new Archivo("Main.java", 6));
-        proyecto.agregarArchivo(new Archivo("Carrito.java", 9));
-        universidad.agregarCarpeta(proyecto);
-        documentos.agregarCarpeta(universidad);
+        proyecto.agregar(new Archivo("Main.java", 6));
+        proyecto.agregar(new Archivo("Carrito.java", 9));
+        
+        universidad.agregar(proyecto);
+        documentos.agregar(universidad);
+
+        // Implementación del nuevo requisito sin tocar Carpeta
+        documentos.agregar(new AccesoDirecto("Acceso directo a Proyecto :D", proyecto));
+        universidad.agregar(new AccesoDirecto("Acceso directo a hoja de Vida :b", hojaDeVida));
 
         documentos.mostrar("");
-
-        // NUEVO REQUISITO: accesos directos de 1 KB dentro de cualquier carpeta.
-        // Con este diseno: otra lista, otro metodo agregar y un tercer ciclo en CADA operacion.
     }
 }

@@ -1,5 +1,3 @@
-// CLASE DE UN PROVEEDOR EXTERNO: NO SE PUEDE MODIFICAR.
-// Mide en grados Fahrenheit y sus metodos tienen otros nombres.
 public class SensorImportado {
     private String modelo;
     private double fahrenheit;
